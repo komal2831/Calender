@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+</head>
+<body>
+
+	<style type="text/css">
+		.container 
+		{
+			width: 400px;
+			height: 400px;
+		}
+		.W
+		{
+			width: 350px;
+			height: 50px;
+			overflow: hidden;
+			background-color: lightgray;
+
+		}
+		.D 
+		{
+			width: 350px;
+			height: 300px;
+
+			background-color: lightgray;
+		}
+		.W .we
+		{
+			float: left;
+			width: 48px;
+			text-align: center;
+			height: 48px;
+			cursor: pointer;
+			border: 1px solid white;
+			font-weight: bold;
+		
+		
+		}
+		.D .da
+		{
+			float: left;
+			font-weight: bold;
+			width: 48px;
+			cursor: pointer;
+			height: 48px;
+			text-align: center;
+			border: 1px solid white;
+		}
+		.D .daa
+		{
+			float: left;
+			font-weight: bold;
+			width: 48px;
+			cursor: pointer;
+			height: 48px;
+			background-color: skyblue;
+			text-align: center;
+			border: 1px solid white;
+		}
+		.main
+		{
+			
+			width: 350px;
+			height: 50px;
+			overflow: hidden;
+			background-color: lightgray;
+		}
+		.main .y1
+		{
+			float: left;
+			font-weight: bold;
+			width: 125px;
+			cursor: pointer;
+			height: 48px;
+			text-align: right;
+		}
+		.main .y2
+		{
+			float: left;
+			font-weight: bold;
+			width: 125px;
+			cursor: pointer;
+			height: 48px;
+			text-align: left;
+		}
+		.main .x
+		{
+			float: left;
+			font-weight: bold;
+			width: 48px;
+			cursor: pointer; 
+			height: 48px;
+			text-align: center;
+			border: 1px solid white;
+		}
+		.main .x:hover
+		{
+			background-color: skyblue;
+		}
+	</style>
+
+	<div class="container">
+	<div class="M1" id="month"></div>
+	<div class="M1" id="year"></div>
+	<div class="W" id="weak"></div>
+	<div  class="D" id="date"></div>
+	</div>
+</body>
+<script>
+
+	let dt= new Date();
+
+	function RenderDate()
+		{
+		var str1="";
+		var str2="";
+		var str3="";
+
+			dt.setDate(1);
+			var today=new Date();
+			var day=dt.getDay();
+			var year=dt.getFullYear();
+			var enddate=new Date(
+					dt.getFullYear(),dt.getMonth()+1,0
+					).getDate();
+			var arrmonth=["JAN","FEB","MAR","APR","MAY","JUN","JLY","AUG","SET","OCT","NOV","DEC"];
+			var month1=arrmonth[dt.getMonth()];
+			var arrweak=["S","M","T","W","T","F","S"];
+			var A1="<div class='main'>";
+			var A="<div class='x' onclick=\"moveDate('prev')\" id='k1'><<</div>";
+			var B="<div class='y1'>"+month1+"</div>";
+			var C="<div class='y2'>"+"-"+year+"</div>";
+			var D ="<div class='x'  onclick=\"moveDate('next')\" id='k2'>>></div>";
+			var A2="</div>";
+			var row="<div>"+A1+A+B+C+D+A2+"</div>";
+			str1 += row;
+
+			document.getElementById("month").innerHTML=str1;
+			//document.getElementById("year").innerHTML=str1;
+
+		for(var j=0;j<arrweak.length;j++)
+		{
+			var weakvalue=arrweak[j];
+			var WEAK="<div class='we'>"+weakvalue+"</div>";
+			str2 += WEAK;
+		}
+			document.getElementById("weak").innerHTML=str2;
+
+		for(l=day;l>0;l--)
+		{
+			var DATE="<div class='da'></div>";
+			str3 += DATE;
+		}
+
+		for(var k=1;k<=enddate;k++)
+		{
+			if(k==today.getDate() && dt.getMonth()==today.getMonth())
+			{
+			var DATE="<div class='daa'>"+k+"</div>";
+			}
+			else
+			{
+			var DATE="<div class='da' onclick='TIME("+k+")'>"+k+"</div>";	
+			}
+			str3 += DATE;
+		}
+
+		for(var m=enddate;m<43;m++)
+		{
+			var DATE="<div class='da'></div>";
+			str3 += DATE;
+		}
+			document.getElementById("date").innerHTML=str3;
+
+	}
+
+
+
+		function moveDate(para)
+		{
+			if(para =='prev')
+			{
+				dt.setMonth(dt.getMonth()-1);
+			}
+			else if(para=='next')
+			{
+				dt.setMonth(dt.getMonth()+1);
+			}
+			RenderDate();
+		}
+
+
+
+		function TIME(t)
+		{
+			console.clear();
+			console.log(t);
+		}
+
+
+	RenderDate();
+</script>
+</html>
